@@ -16,6 +16,8 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 - Unit tests for `Exponential` and `ExponentialWithInterface` (100% statement coverage).
 - `make test` target running the tests with the race detector and a coverage report.
 - `Run unit tests` step in the CI `Compile & Test` job across the Go version matrix.
+- README sections for installation (Go 1.26+), retry behaviour, development tasks, and
+  copyright and license.
 
 ### Changed
 
