@@ -35,6 +35,8 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ### Fixed
 
+- README usage example now compiles (missing returns, unused variable, import grouping).
+- README release badge now uses HTTPS and shows the latest tag automatically.
 - `Exponential` and `ExponentialWithInterface` no longer panic when the sleep duration is
   zero or negative; they now retry immediately without sleeping.
 
