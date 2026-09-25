@@ -11,13 +11,15 @@
 // See the Apache License Version 2.0 for the specific language governing permissions and limitations there under.
 //
 
+// Package retry provides functions to retry the execution of a function with exponential backoff.
 package retry
 
 import (
-	"github.com/pkg/errors"
-	"github.com/sirupsen/logrus"
 	"math/rand"
 	"time"
+
+	"github.com/pkg/errors"
+	"github.com/sirupsen/logrus"
 )
 
 // Exponential provides the ability to exponentially retry the execution of a function
@@ -27,9 +29,12 @@ func Exponential(attempts int, sleep time.Duration, prefix string, f func() erro
 		logrus.Warnf("Retrying func (attempts: %d): %s: %s", attempts, prefix, err)
 
 		if attempts--; attempts > 0 {
-			jitter := time.Duration(rand.Int63n(int64(sleep)))
-			sleep = sleep + jitter/2
-			time.Sleep(sleep)
+			// Skip the sleep when there is no backoff, as rand.Int63n panics on n <= 0
+			if sleep > 0 {
+				jitter := time.Duration(rand.Int63n(int64(sleep)))
+				sleep = sleep + jitter/2
+				time.Sleep(sleep)
+			}
 			return Exponential(attempts, 2*sleep, prefix, f)
 		}
 		return errors.Wrap(err, prefix)
@@ -46,9 +51,12 @@ func ExponentialWithInterface(attempts int, sleep time.Duration, prefix string, 
 		logrus.Warnf("Retrying func (attempts: %d): %s: %s", attempts, prefix, err)
 
 		if attempts--; attempts > 0 {
-			jitter := time.Duration(rand.Int63n(int64(sleep)))
-			sleep = sleep + jitter/2
-			time.Sleep(sleep)
+			// Skip the sleep when there is no backoff, as rand.Int63n panics on n <= 0
+			if sleep > 0 {
+				jitter := time.Duration(rand.Int63n(int64(sleep)))
+				sleep = sleep + jitter/2
+				time.Sleep(sleep)
+			}
 			return ExponentialWithInterface(attempts, 2*sleep, prefix, f)
 		}
 		return nil, errors.Wrap(err, prefix)

@@ -36,5 +36,5 @@ func main() {
 }
 ```
 
-[release-image]: http://img.shields.io/badge/golang-0.1.0-6ad7e5.svg?style=flat
+[release-image]: http://img.shields.io/badge/golang-0.2.0-6ad7e5.svg?style=flat
 [releases]: https://github.com/snowplow-devops/go-retry/releases/
