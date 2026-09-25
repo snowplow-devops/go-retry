@@ -1,9 +1,10 @@
 module github.com/snowplow-devops/go-retry
 
-go 1.13
+go 1.26.0
 
 require (
 	github.com/pkg/errors v0.9.1
-	github.com/sirupsen/logrus v1.7.0
-	golang.org/x/sys v0.0.0-20200930185726-fdedc70b468f // indirect
+	github.com/sirupsen/logrus v1.10.2
 )
+
+require golang.org/x/sys v0.48.0 // indirect
